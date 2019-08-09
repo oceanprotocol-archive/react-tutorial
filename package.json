@@ -2,8 +2,6 @@
   "name": "react-tutorial",
   "version": "1.0.0",
   "description": "React + squid.js interacting in the most minimal way with Ocean Protocol.",
-  "keywords": [],
-  "main": "src/index.js",
   "dependencies": {
     "@oceanprotocol/keeper-contracts": "0.10.3",
     "@oceanprotocol/squid": "0.6.6",
@@ -12,19 +10,10 @@
     "react-scripts": "^3.0.1",
     "web3": "^1.2.1"
   },
-  "devDependencies": {
-    "typescript": "3.3.3"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  }
 }
