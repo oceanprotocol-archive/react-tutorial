@@ -2,19 +2,19 @@
 
 <h1 align="center">react-tutorial</h1>
 
-> 🦄🦑 React + squid.js interacting in the most minimal way with Ocean Protocol.
+> 🦄🦑 React + web3.js + squid.js interacting in the most minimal way with Ocean Protocol.
 
-<img width="947" alt="Screen Shot 2019-08-09 at 12 10 50" src="https://user-images.githubusercontent.com/90316/62772018-cb4e0d80-ba9e-11e9-9492-1118943c6c7b.png">
-
----
+This app implements the full Ocean flow of registering, searching, and consuming assets. It is meant to be used alongside the React tutorial series in our docs:
 
 - [**React Tutorial: React App Setup**](https://docs.oceanprotocol.com/tutorials/react-setup/)
 - [**React Tutorial: Publish a Data Set**](https://docs.oceanprotocol.com/tutorials/react-publish-data-set/)
 - [**React Tutorial: Get & Use a Data Set**](https://docs.oceanprotocol.com/tutorials/react-get-use-data-set/)
 
----
+<a href="https://docs.oceanprotocol.com/tutorials/react-setup/"><img width="947" alt="Screen Shot 2019-08-09 at 12 10 50" src="https://user-images.githubusercontent.com/90316/62772018-cb4e0d80-ba9e-11e9-9492-1118943c6c7b.png"></a>
 
 ## 🦄 CodeSandbox
+
+This repository is available on CodeSandbox as a playground.
 
 [![Edit react-tutorial](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/oceanprotocol/react-tutorial/tree/master/?fontsize=14)
 
