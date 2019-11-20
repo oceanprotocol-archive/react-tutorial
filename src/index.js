@@ -73,18 +73,18 @@ class App extends Component {
       // get first asset from search results
       const consumeAsset = this.state.results[0]
       // get service we want to execute
-      const service = consumeAsset.findServiceByType('Access')
+      const service = consumeAsset.findServiceByType('access')
       // order service agreement
       const agreement = await this.state.ocean.assets.order(
         consumeAsset.id,
-        service.serviceDefinitionId,
+        service.index,
         accounts[0]
       )
       // consume it
       await this.state.ocean.assets.consume(
         agreement,
         consumeAsset.id,
-        service.serviceDefinitionId,
+        service.index,
         accounts[0],
         '',
         0

@@ -1,8 +1,9 @@
 const asset = {
-  base: {
+  main: {
     name: '10 Monkey Species Small',
     dateCreated: '2012-02-01T10:55:11Z',
     author: 'Mario',
+    type: 'dataset',
     license: 'CC0: Public Domain',
     price: '0',
     files: [
@@ -11,7 +12,7 @@ const asset = {
         contentType: 'application/zip',
         checksum: '2bf9d229d110d1976cdf85e9f3256c7f',
         checksumType: 'MD5',
-        contentLength: 12057507,
+        contentLength: '12057507',
         compression: 'zip',
         encoding: 'UTF-8',
         url:
@@ -22,19 +23,15 @@ const asset = {
         contentType: 'text/txt',
         checksum: '354d19c0733c47ef3a6cce5b633116b0',
         checksumType: 'MD5',
-        contentLength: 928,
+        contentLength: '928',
         url:
-          'https://s3.amazonaws.com/datacommons-seeding-us-east/10_Monkey_Species_Small/assets/monkey_labels.txt',
-        resourceId: 'test'
-      },
-      {
-        index: 2
+          'https://s3.amazonaws.com/datacommons-seeding-us-east/10_Monkey_Species_Small/assets/monkey_labels.txt'
       }
-    ],
-    checksum: '',
+    ]
+  },
+  additionalInformation: {
     categories: ['image'],
     tags: ['image data', 'classification', 'animals'],
-    type: 'dataset',
     description: 'EXAMPLE ONLY ',
     copyrightHolder: 'Unknown',
     workExample: 'image path, id, label',
