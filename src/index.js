@@ -14,7 +14,8 @@ if (window.web3) {
 class App extends Component {
   state = {
     ocean: undefined,
-    results: []
+    results: [],
+    ddo: undefined
   }
 
   async componentDidMount() {
@@ -43,6 +44,8 @@ class App extends Component {
       const ddo = await this.state.ocean.assets.create(asset, accounts[0])
       console.log('Asset successfully submitted.')
       console.log(ddo)
+      // keep track of this registered asset for consumption later on
+      this.setState({ ddo })
       alert(
         'Asset successfully submitted. Look into your console to see the response DDO object.'
       )
@@ -70,8 +73,8 @@ class App extends Component {
     try {
       // get all accounts
       const accounts = await this.state.ocean.accounts.list()
-      // get first asset from search results
-      const consumeAsset = this.state.results[0]
+      // get our registered asset
+      const consumeAsset = this.state.ddo
       // get service we want to execute
       const service = consumeAsset.findServiceByType('access')
       // order service agreement
