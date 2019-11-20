@@ -30,7 +30,7 @@ const asset = {
     ]
   },
   additionalInformation: {
-    categories: ['image'],
+    categories: ['Biology'],
     tags: ['image data', 'classification', 'animals'],
     description: 'EXAMPLE ONLY ',
     copyrightHolder: 'Unknown',
