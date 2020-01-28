@@ -81,7 +81,6 @@ class App extends Component {
       // order service agreement
       const agreement = await this.state.ocean.assets.order(
         consumeAsset.id,
-        service.index,
         accounts[0]
       )
       // consume it
