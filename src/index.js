@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Ocean } from '@oceanprotocol/squid'
 import Web3 from 'web3'
 import asset from './asset'
+import Compute from './Compute'
 
 let web3
 
@@ -119,6 +120,8 @@ class App extends Component {
         <button onClick={() => this.consumeAsset()} disabled={!web3}>
           Consume asset
         </button>
+        <hr />
+        <Compute ocean={this.state.ocean} web3={web3} />
       </div>
     )
   }
