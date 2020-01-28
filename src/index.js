@@ -76,8 +76,6 @@ class App extends Component {
       const accounts = await this.state.ocean.accounts.list()
       // get our registered asset
       const consumeAsset = this.state.ddo
-      // get service we want to execute
-      const service = consumeAsset.findServiceByType('access')
       // order service agreement
       const agreement = await this.state.ocean.assets.order(
         consumeAsset.id,
@@ -87,7 +85,6 @@ class App extends Component {
       await this.state.ocean.assets.consume(
         agreement,
         consumeAsset.id,
-        service.index,
         accounts[0],
         '',
         0
