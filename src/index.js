@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Ocean } from '@oceanprotocol/squid'
 import Web3 from 'web3'
-import asset from './asset'
+import * as Assets from './asset'
 import Compute from './Compute'
 
 let web3
@@ -16,23 +16,23 @@ class App extends Component {
   state = {
     ocean: undefined,
     results: [],
-    ddo: undefined
+    ddo: undefined    
   }
 
   async componentDidMount() {
     const ocean = await new Ocean.getInstance({
       web3Provider: web3,
-      nodeUri: 'https://nile.dev-ocean.com',
-      aquariusUri: 'https://aquarius.marketplace.dev-ocean.com',
-      brizoUri: 'https://brizo.marketplace.dev-ocean.com',
-      brizoAddress: '0x4aaab179035dc57b35e2ce066919048686f82972',
-      secretStoreUri: 'https://secret-store.nile.dev-ocean.com',
+      //nodeUri: 'https://nile.dev-ocean.com',
+      //aquariusUri: 'https://aquarius.marketplace.dev-ocean.com',
+      //brizoUri: 'https://brizo.marketplace.dev-ocean.com',
+      //brizoAddress: '0x4aaab179035dc57b35e2ce066919048686f82972',
+      //secretStoreUri: 'https://secret-store.nile.dev-ocean.com',
       // local Spree connection
-      // nodeUri: 'http://localhost:8545',
-      // aquariusUri: 'http://aquarius:5000',
-      // brizoUri: 'http://localhost:8030',
-      // brizoAddress: '0x00bd138abd70e2f00903268f3db08f2d25677c9e',
-      // secretStoreUri: 'http://localhost:12001',
+      nodeUri: 'http://localhost:8545',
+      aquariusUri: 'http://aquarius:5000',
+      brizoUri: 'http://localhost:8030',
+      brizoAddress: '0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0',
+      secretStoreUri: 'http://localhost:12001',
       verbose: true
     })
     this.setState({ ocean })
@@ -42,7 +42,7 @@ class App extends Component {
   async registerAsset() {
     try {
       const accounts = await this.state.ocean.accounts.list()
-      const ddo = await this.state.ocean.assets.create(asset, accounts[0])
+      const ddo = await this.state.ocean.assets.create(Assets.getAsset(), accounts[0])
       console.log('Asset successfully submitted.')
       console.log(ddo)
       // keep track of this registered asset for consumption later on
