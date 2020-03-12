@@ -16,7 +16,7 @@ class App extends Component {
   state = {
     ocean: undefined,
     results: [],
-    ddo: undefined    
+    ddo: undefined
   }
 
   async componentDidMount() {
@@ -42,7 +42,10 @@ class App extends Component {
   async registerAsset() {
     try {
       const accounts = await this.state.ocean.accounts.list()
-      const ddo = await this.state.ocean.assets.create(Assets.getAsset(), accounts[0])
+      const ddo = await this.state.ocean.assets.create(
+        Assets.getAsset(),
+        accounts[0]
+      )
       console.log('Asset successfully submitted.')
       console.log(ddo)
       // keep track of this registered asset for consumption later on
