@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Ocean } from '@oceanprotocol/squid'
 import Web3 from 'web3'
-import * as Assets from './asset'
+import { asset } from './asset'
 import Compute from './Compute'
 
 let web3
@@ -42,10 +42,7 @@ class App extends Component {
   async registerAsset() {
     try {
       const accounts = await this.state.ocean.accounts.list()
-      const ddo = await this.state.ocean.assets.create(
-        Assets.getAsset(),
-        accounts[0]
-      )
+      const ddo = await this.state.ocean.assets.create(asset, accounts[0])
       console.log('Asset successfully submitted.')
       console.log(ddo)
       // keep track of this registered asset for consumption later on
