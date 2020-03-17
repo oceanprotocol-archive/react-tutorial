@@ -73,11 +73,12 @@ export default function Compute({ ocean, web3 }) {
     }
   }
 
-  // order and start the compute service
+  // order and start the compute service with an algorithm published as an asset
   async function startWithPublishedAlgo() {
     return startCompute(ddoAlgorithmId)
   }
 
+  // order and start the compute service with a passed raw algorithm
   async function startWithRawAlgo() {
     return startCompute(undefined, rawAlgoMeta)
   }
@@ -85,7 +86,6 @@ export default function Compute({ ocean, web3 }) {
   async function getStatus() {
     try {
       const accounts = await ocean.accounts.list()
-      // start a compute job
 
       const status = await ocean.compute.status(accounts[0], agreementId, jobId)
       setJobStatus(JSON.stringify(status, null, '\t'))
@@ -94,8 +94,6 @@ export default function Compute({ ocean, web3 }) {
       console.error(error.message)
     }
   }
-
-  // get results
 
   if (!web3) {
     return null
