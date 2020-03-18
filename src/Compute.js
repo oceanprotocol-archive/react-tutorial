@@ -8,7 +8,8 @@ export default function Compute({ ocean, web3 }) {
   const [jobId, setJobId] = useState('')
   const [agreementId, setAgreementId] = useState('')
   const [ddoAlgorithmId, setDdoAlgorithmId] = useState('')
-
+  const [divAlgoStyle, setdivAlgoStyle] = useState('')
+  const [textRawAlgo, settextRawAlgo] = useState('')
   // publish a dataset and an algorithm
   async function publish() {
     try {
@@ -63,7 +64,7 @@ export default function Compute({ ocean, web3 }) {
         accounts[0],
         agreement,
         algorithmId,
-        algorithmMeta
+        JSON.stringify(algorithmMeta)
       )
       setJobId(status.jobId)
       console.log(status)
@@ -80,6 +81,7 @@ export default function Compute({ ocean, web3 }) {
 
   // order and start the compute service with a passed raw algorithm
   async function startWithRawAlgo() {
+    rawAlgoMeta.rawcode = textRawAlgo
     return startCompute(undefined, rawAlgoMeta)
   }
 
@@ -95,6 +97,18 @@ export default function Compute({ ocean, web3 }) {
     }
   }
 
+  async function showDivAlgo() {
+    if (divAlgoStyle === 'none') setdivAlgoStyle('block')
+    else setdivAlgoStyle('none')
+  }
+
+  async function updateRawAlgoCode(event) {
+    settextRawAlgo(event.target.value)
+  }
+
+  async function updateDdoAssetId(event) {
+    setDdoAssetId(event.target.value)
+  }
   if (!web3) {
     return null
   }
@@ -105,7 +119,7 @@ export default function Compute({ ocean, web3 }) {
       <ComputeSection>
         <button onClick={publish}>Publish dataset with compute service</button>
         Asset DID:
-        <input type="text" value={ddoAssetId} readOnly />
+        <input type="text" value={ddoAssetId} onChange={updateDdoAssetId} />
       </ComputeSection>
       <ComputeSection>
         <button onClick={publishalgo}>Publish algorithm</button>
@@ -122,6 +136,15 @@ export default function Compute({ ocean, web3 }) {
         <button onClick={startWithRawAlgo} disabled={!ddoAssetId}>
           Order and start compute service with raw algorithm
         </button>
+        <button onClick={showDivAlgo}>Show/Hide Raw Algo</button>
+        <div style={{ display: divAlgoStyle }}>
+          <textarea
+            rows="20"
+            cols="120"
+            value={textRawAlgo}
+            onChange={updateRawAlgoCode}
+          />
+        </div>
         Job ID:
         <input type="text" value={jobId} readOnly />
       </ComputeSection>
