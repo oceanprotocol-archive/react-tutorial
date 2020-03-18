@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import { asset } from './asset'
 import { algoAsset, createComputeService, rawAlgoMeta } from './compute-asset'
 
@@ -10,6 +11,8 @@ export default function Compute({ ocean, web3 }) {
   const [ddoAlgorithmId, setDdoAlgorithmId] = useState('')
   const [divAlgoStyle, setdivAlgoStyle] = useState('')
   const [textRawAlgo, settextRawAlgo] = useState('')
+  const [PublishLogState, setPublishLogState] = useState('')
+  const [PublishOutputState, setPublishOutputState] = useState('')
   // publish a dataset and an algorithm
   async function publish() {
     try {
@@ -55,6 +58,21 @@ export default function Compute({ ocean, web3 }) {
   async function startCompute(algorithmId, algorithmMeta) {
     try {
       const accounts = await ocean.accounts.list()
+      const ComputeOutput = {
+        publishAlgorithmLog:
+          PublishLogState === '' || PublishLogState === false ? false : true,
+        publishOutput:
+          PublishOutputState === '' || PublishOutputState === false
+            ? false
+            : true,
+        brizoAddress: ocean.config.brizoAddress,
+        brizoUri: ocean.config.brizoUri,
+        metadataUri: ocean.config.aquariusUri,
+        nodeUri: ocean.config.nodeUri,
+        owner: accounts[0].getId(),
+        secretStoreUri: ocean.config.secretStoreUri
+      }
+      console.log(ComputeOutput)
 
       // order the compute service
       const agreement = await ocean.compute.order(accounts[0], ddoAssetId)
@@ -64,7 +82,8 @@ export default function Compute({ ocean, web3 }) {
         accounts[0],
         agreement,
         algorithmId,
-        JSON.stringify(algorithmMeta)
+        encodeURIComponent(JSON.stringify(algorithmMeta)),
+        ComputeOutput
       )
       setJobId(status.jobId)
       console.log(status)
@@ -109,6 +128,13 @@ export default function Compute({ ocean, web3 }) {
   async function updateDdoAssetId(event) {
     setDdoAssetId(event.target.value)
   }
+  async function handlePublishOutputState(event) {
+    setPublishOutputState(event.target.checked)
+  }
+  async function handlePublishLogState(event) {
+    setPublishLogState(event.target.checked)
+  }
+
   if (!web3) {
     return null
   }
@@ -127,6 +153,18 @@ export default function Compute({ ocean, web3 }) {
         <input type="text" value={ddoAlgorithmId} readOnly />
       </ComputeSection>
       <ComputeSection>
+        <input
+          type="checkbox"
+          checked={PublishOutputState}
+          onChange={handlePublishOutputState}
+        />
+        Publish Output into the Marketplace
+        <input
+          type="checkbox"
+          checked={PublishLogState}
+          onChange={handlePublishLogState}
+        />
+        Publish Algorithm Logs into the Marketplace
         <button
           onClick={startWithPublishedAlgo}
           disabled={!ddoAssetId || !ddoAlgorithmId}
@@ -139,7 +177,7 @@ export default function Compute({ ocean, web3 }) {
         <button onClick={showDivAlgo}>Show/Hide Raw Algo</button>
         <div style={{ display: divAlgoStyle }}>
           <textarea
-            rows="20"
+            rows="10"
             cols="120"
             value={textRawAlgo}
             onChange={updateRawAlgoCode}
@@ -153,7 +191,7 @@ export default function Compute({ ocean, web3 }) {
           Get Job Status
         </button>
         Compute status:
-        <textarea rows="20" cols="120" value={jobStatus} readOnly />
+        <textarea rows="15" cols="120" value={jobStatus} readOnly />
       </ComputeSection>
     </>
   )
