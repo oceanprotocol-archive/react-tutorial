@@ -22,17 +22,17 @@ class App extends Component {
   async componentDidMount() {
     const ocean = await new Ocean.getInstance({
       web3Provider: web3,
-      //nodeUri: 'https://nile.dev-ocean.com',
-      //aquariusUri: 'https://aquarius.marketplace.dev-ocean.com',
-      //brizoUri: 'https://brizo.marketplace.dev-ocean.com',
-      //brizoAddress: '0x4aaab179035dc57b35e2ce066919048686f82972',
-      //secretStoreUri: 'https://secret-store.nile.dev-ocean.com',
+      nodeUri: 'https://nile.dev-ocean.com',
+      aquariusUri: 'https://aquarius.marketplace.dev-ocean.com',
+      brizoUri: 'https://brizo.marketplace.dev-ocean.com',
+      brizoAddress: '0x4aaab179035dc57b35e2ce066919048686f82972',
+      secretStoreUri: 'https://secret-store.nile.dev-ocean.com',
       // local Spree connection
-      nodeUri: 'http://localhost:8545',
-      aquariusUri: 'http://aquarius:5000',
-      brizoUri: 'http://localhost:8030',
-      brizoAddress: '0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0',
-      secretStoreUri: 'http://localhost:12001',
+      //nodeUri: 'http://localhost:8545',
+      //aquariusUri: 'http://aquarius:5000',
+      //brizoUri: 'http://localhost:8030',
+      //brizoAddress: '0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0',
+      //secretStoreUri: 'http://localhost:12001',
       verbose: true
     })
     this.setState({ ocean })

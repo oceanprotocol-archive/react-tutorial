@@ -10,9 +10,9 @@ export default function Compute({ ocean, web3 }) {
   const [agreementId, setAgreementId] = useState('')
   const [ddoAlgorithmId, setDdoAlgorithmId] = useState('')
   const [divAlgoStyle, setdivAlgoStyle] = useState('')
-  const [textRawAlgo, settextRawAlgo] = useState('')
-  const [PublishLogState, setPublishLogState] = useState('')
-  const [PublishOutputState, setPublishOutputState] = useState('')
+  const [textRawAlgo, setTextRawAlgo] = useState('')
+  const [publishLogState, setPublishLogState] = useState('')
+  const [publishOutputState, setPublishOutputState] = useState('')
   // publish a dataset and an algorithm
   async function publish() {
     try {
@@ -60,9 +60,9 @@ export default function Compute({ ocean, web3 }) {
       const accounts = await ocean.accounts.list()
       const ComputeOutput = {
         publishAlgorithmLog:
-          PublishLogState === '' || PublishLogState === false ? false : true,
+          publishLogState === '' || publishLogState === false ? false : true,
         publishOutput:
-          PublishOutputState === '' || PublishOutputState === false
+          publishOutputState === '' || publishOutputState === false
             ? false
             : true,
         brizoAddress: ocean.config.brizoAddress,
@@ -122,7 +122,7 @@ export default function Compute({ ocean, web3 }) {
   }
 
   async function updateRawAlgoCode(event) {
-    settextRawAlgo(event.target.value)
+    setTextRawAlgo(event.target.value)
   }
 
   async function updateDdoAssetId(event) {
@@ -155,13 +155,13 @@ export default function Compute({ ocean, web3 }) {
       <ComputeSection>
         <input
           type="checkbox"
-          checked={PublishOutputState}
+          checked={publishOutputState}
           onChange={handlePublishOutputState}
         />
         Publish Output into the Marketplace
         <input
           type="checkbox"
-          checked={PublishLogState}
+          checked={publishLogState}
           onChange={handlePublishLogState}
         />
         Publish Algorithm Logs into the Marketplace
