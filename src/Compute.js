@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { asset } from './asset'
-import { algoAsset, createComputeService, rawAlgoMeta } from './compute-asset'
+import { algoAsset, createComputeService, rawAlgoMeta } from './asset-compute'
 
 export default function Compute({ ocean, web3 }) {
   const [ddoAssetId, setDdoAssetId] = useState('')
@@ -83,7 +83,7 @@ export default function Compute({ ocean, web3 }) {
       )
       setJobId(status.jobId)
       console.log(status)
-      alert('Job created.  You can query for status now')
+      alert('Compute job created. You can query for its status now.')
     } catch (error) {
       console.error(error.message)
     }
@@ -123,9 +123,11 @@ export default function Compute({ ocean, web3 }) {
   async function updateDdoAssetId(event) {
     setDdoAssetId(event.target.value)
   }
+
   async function handlePublishOutputState(event) {
     setPublishOutputState(event.target.checked)
   }
+
   async function handlePublishLogState(event) {
     setPublishLogState(event.target.checked)
   }
@@ -136,30 +138,71 @@ export default function Compute({ ocean, web3 }) {
 
   return (
     <>
-      <h3>Compute</h3>
+      <h2>Compute</h2>
       <ComputeSection>
+        <h3>1. Publish Dataset</h3>
         <button onClick={publish}>Publish dataset with compute service</button>
-        Asset DID:
-        <input type="text" value={ddoAssetId} onChange={updateDdoAssetId} />
+
+        <p>
+          <Label for="ddoAssetId">Asset DID</Label>
+          <input
+            type="text"
+            id="ddoAssetId"
+            value={ddoAssetId}
+            onChange={updateDdoAssetId}
+          />
+        </p>
       </ComputeSection>
       <ComputeSection>
+        <h3>2. Publish Algorithm</h3>
         <button onClick={publishalgo}>Publish algorithm</button>
-        Algo DID:
-        <input type="text" value={ddoAlgorithmId} readOnly />
+        <p>
+          <Label for="ddoAlgorithmId">Algorithm DID</Label>
+          <code id="ddoAlgorithmId">{ddoAlgorithmId}</code>
+        </p>
       </ComputeSection>
       <ComputeSection>
-        <input
-          type="checkbox"
-          checked={publishOutputState}
-          onChange={handlePublishOutputState}
-        />
-        Publish Output into the Marketplace
-        <input
-          type="checkbox"
-          checked={publishLogState}
-          onChange={handlePublishLogState}
-        />
-        Publish Algorithm Logs into the Marketplace
+        <h3>3. Start Compute Job</h3>
+
+        <p>
+          <Label for="publishOutputState">
+            <input
+              type="checkbox"
+              id="publishOutputState"
+              checked={publishOutputState}
+              onChange={handlePublishOutputState}
+            />
+            Publish Output into the Marketplace
+          </Label>
+          <Label for="publishLogState">
+            <input
+              type="checkbox"
+              id="publishLogState"
+              checked={publishLogState}
+              onChange={handlePublishLogState}
+            />
+            Publish Algorithm Logs into the Marketplace
+          </Label>
+        </p>
+
+        <div>
+          <button onClick={showDivAlgo}>Show/Hide Raw Algorithm</button>
+          <p style={{ display: isAlgoInputVisible ? 'block' : 'none' }}>
+            <Label for="jobStatus">Raw Algorithm</Label>
+            <textarea
+              style={{ width: '100%' }}
+              rows="10"
+              value={textRawAlgo}
+              onChange={updateRawAlgoCode}
+            />
+          </p>
+        </div>
+
+        <p>
+          <Label for="jobId">Compute Job ID</Label>
+          <code>{jobId}</code>
+        </p>
+
         <button
           onClick={startWithPublishedAlgo}
           disabled={!ddoAssetId || !ddoAlgorithmId}
@@ -169,24 +212,23 @@ export default function Compute({ ocean, web3 }) {
         <button onClick={startWithRawAlgo} disabled={!ddoAssetId}>
           Order and start compute service with raw algorithm
         </button>
-        <button onClick={showDivAlgo}>Show/Hide Raw Algo</button>
-        <div style={{ display: isAlgoInputVisible ? 'block' : 'none' }}>
-          <textarea
-            rows="10"
-            cols="120"
-            value={textRawAlgo}
-            onChange={updateRawAlgoCode}
-          />
-        </div>
-        Job ID:
-        <input type="text" value={jobId} readOnly />
       </ComputeSection>
       <ComputeSection>
+        <h3>4. Get Compute Job Status</h3>
+
+        <p>
+          <Label for="jobStatus">Compute Job Status</Label>
+          <pre
+            id="jobStatus"
+            style={{ padding: '1rem', background: 'ghostwhite' }}
+          >
+            <code>{jobStatus}</code>
+          </pre>
+        </p>
+
         <button onClick={getStatus} disabled={!jobId}>
           Get Job Status
         </button>
-        Compute status:
-        <textarea rows="15" cols="120" value={jobStatus} readOnly />
       </ComputeSection>
     </>
   )
@@ -197,14 +239,23 @@ function ComputeSection({ children }) {
     <>
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
+          textAlign: 'left',
+          paddingBottom: '1rem',
+          maxWidth: '40rem',
+          margin: '1rem auto'
         }}
       >
         {children}
       </div>
       <hr />
     </>
+  )
+}
+
+function Label({ children, ...props }) {
+  return (
+    <label style={{ display: 'block', fontSize: '0.8rem' }} {...props}>
+      {children}
+    </label>
   )
 }
