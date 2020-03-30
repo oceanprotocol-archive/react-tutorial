@@ -9,10 +9,11 @@ export default function Compute({ ocean, web3 }) {
   const [jobId, setJobId] = useState('')
   const [agreementId, setAgreementId] = useState('')
   const [ddoAlgorithmId, setDdoAlgorithmId] = useState('')
-  const [divAlgoStyle, setdivAlgoStyle] = useState('')
+  const [isAlgoInputVisible, setIsAlgoInputVisible] = useState('')
   const [textRawAlgo, setTextRawAlgo] = useState('')
-  const [publishLogState, setPublishLogState] = useState('')
-  const [publishOutputState, setPublishOutputState] = useState('')
+  const [publishLogState, setPublishLogState] = useState(false)
+  const [publishOutputState, setPublishOutputState] = useState(false)
+
   // publish a dataset and an algorithm
   async function publish() {
     try {
@@ -59,12 +60,8 @@ export default function Compute({ ocean, web3 }) {
     try {
       const accounts = await ocean.accounts.list()
       const ComputeOutput = {
-        publishAlgorithmLog:
-          publishLogState === '' || publishLogState === false ? false : true,
-        publishOutput:
-          publishOutputState === '' || publishOutputState === false
-            ? false
-            : true,
+        publishAlgorithmLog: publishLogState,
+        publishOutput: publishOutputState,
         brizoAddress: ocean.config.brizoAddress,
         brizoUri: ocean.config.brizoUri,
         metadataUri: ocean.config.aquariusUri,
@@ -117,8 +114,8 @@ export default function Compute({ ocean, web3 }) {
   }
 
   async function showDivAlgo() {
-    if (divAlgoStyle === 'none') setdivAlgoStyle('block')
-    else setdivAlgoStyle('none')
+    const style = isAlgoInputVisible ? false : true
+    setIsAlgoInputVisible(style)
   }
 
   async function updateRawAlgoCode(event) {
@@ -129,10 +126,10 @@ export default function Compute({ ocean, web3 }) {
     setDdoAssetId(event.target.value)
   }
   async function handlePublishOutputState(event) {
-    setPublishOutputState(event.target.checked)
+    setPublishOutputState(!!event.target.checked)
   }
   async function handlePublishLogState(event) {
-    setPublishLogState(event.target.checked)
+    setPublishLogState(!!event.target.checked)
   }
 
   if (!web3) {
@@ -175,7 +172,7 @@ export default function Compute({ ocean, web3 }) {
           Order and start compute service with raw algorithm
         </button>
         <button onClick={showDivAlgo}>Show/Hide Raw Algo</button>
-        <div style={{ display: divAlgoStyle }}>
+        <div style={{ display: isAlgoInputVisible ? 'block' : 'none' }}>
           <textarea
             rows="10"
             cols="120"
