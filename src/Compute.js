@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import { asset } from './asset'
-import { algoAsset, createComputeService, rawAlgoMeta } from './asset-compute'
+import asset from './asset'
+import { assetAlgo, createComputeService, rawAlgoMeta } from './asset-compute'
 
 export default function Compute({ ocean, web3 }) {
   const [ddoAssetId, setDdoAssetId] = useState('')
@@ -45,7 +45,7 @@ export default function Compute({ ocean, web3 }) {
       const accounts = await ocean.accounts.list()
       console.log('Publishing algo.')
 
-      const ddoAlgorithmNew = await ocean.assets.create(algoAsset, accounts[0])
+      const ddoAlgorithmNew = await ocean.assets.create(assetAlgo, accounts[0])
       console.log(ddoAlgorithmNew)
       console.log('Algo asset successfully submitted.')
       // keep track of this registered asset for consumption later on
@@ -59,7 +59,7 @@ export default function Compute({ ocean, web3 }) {
   async function startCompute(algorithmId, algorithmMeta) {
     try {
       const accounts = await ocean.accounts.list()
-      const ComputeOutput = {
+      const computeOutput = {
         publishAlgorithmLog: publishLogState,
         publishOutput: publishOutputState,
         brizoAddress: ocean.config.brizoAddress,
@@ -69,7 +69,7 @@ export default function Compute({ ocean, web3 }) {
         owner: accounts[0].getId(),
         secretStoreUri: ocean.config.secretStoreUri
       }
-      console.log(ComputeOutput)
+      console.log(computeOutput)
       // order the compute service
       const agreement = await ocean.compute.order(accounts[0], ddoAssetId)
       setAgreementId(agreement)
@@ -79,7 +79,7 @@ export default function Compute({ ocean, web3 }) {
         agreement,
         algorithmId,
         encodeURIComponent(JSON.stringify(algorithmMeta)),
-        ComputeOutput
+        computeOutput
       )
       setJobId(status.jobId)
       console.log(status)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Ocean } from '@oceanprotocol/squid'
 import Web3 from 'web3'
-import { asset } from './asset'
+import asset from './asset'
 import Compute from './Compute'
 
 let web3

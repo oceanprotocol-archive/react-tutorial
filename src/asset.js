@@ -1,4 +1,4 @@
-export const asset = {
+const asset = {
   main: {
     name: '10 Monkey Species Small',
     dateCreated: '2012-02-01T10:55:11Z',
@@ -50,3 +50,5 @@ export const asset = {
     inLanguage: 'en'
   }
 }
+
+export default asset

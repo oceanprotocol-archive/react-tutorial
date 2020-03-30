@@ -1,4 +1,4 @@
-export const algoAsset = {
+export const assetAlgo = {
   main: {
     name: 'My great algo',
     dateCreated: '2012-02-01T10:55:11Z',
