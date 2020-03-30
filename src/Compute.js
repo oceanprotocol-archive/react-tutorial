@@ -70,7 +70,6 @@ export default function Compute({ ocean, web3 }) {
         secretStoreUri: ocean.config.secretStoreUri
       }
       console.log(ComputeOutput)
-
       // order the compute service
       const agreement = await ocean.compute.order(accounts[0], ddoAssetId)
       setAgreementId(agreement)
@@ -114,8 +113,7 @@ export default function Compute({ ocean, web3 }) {
   }
 
   async function showDivAlgo() {
-    const style = isAlgoInputVisible ? false : true
-    setIsAlgoInputVisible(style)
+    setIsAlgoInputVisible(isAlgoInputVisible ? false : true)
   }
 
   async function updateRawAlgoCode(event) {
@@ -126,10 +124,10 @@ export default function Compute({ ocean, web3 }) {
     setDdoAssetId(event.target.value)
   }
   async function handlePublishOutputState(event) {
-    setPublishOutputState(!!event.target.checked)
+    setPublishOutputState(event.target.checked)
   }
   async function handlePublishLogState(event) {
-    setPublishLogState(!!event.target.checked)
+    setPublishLogState(event.target.checked)
   }
 
   if (!web3) {
