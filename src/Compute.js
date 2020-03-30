@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import asset from './asset'
-import { assetAlgo, createComputeService, rawAlgoMeta } from './asset-compute'
+import { assetAlgo, rawAlgoMeta } from './asset-compute'
 
 export default function Compute({ ocean, web3 }) {
   const [ddoAssetId, setDdoAssetId] = useState('')
@@ -20,8 +20,7 @@ export default function Compute({ ocean, web3 }) {
       const accounts = await ocean.accounts.list()
       console.log('Publishing asset.')
 
-      const service = await createComputeService(
-        ocean,
+      const service = await ocean.compute.createComputeServiceAttributes(
         accounts[0],
         '0',
         '2020-03-10T10:00:00Z'
@@ -78,7 +77,7 @@ export default function Compute({ ocean, web3 }) {
         accounts[0],
         agreement,
         algorithmId,
-        encodeURIComponent(JSON.stringify(algorithmMeta)),
+        algorithmMeta,
         computeOutput
       )
       setJobId(status.jobId)
