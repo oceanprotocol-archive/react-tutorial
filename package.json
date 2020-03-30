@@ -4,11 +4,11 @@
   "description": "React + squid.js interacting in the most minimal way with Ocean Protocol.",
   "dependencies": {
     "@oceanprotocol/squid": "^2.0.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "^3.3.0",
-    "web3": "^1.2.5",
-    "prettier": "^1.19.1"
+    "prettier": "^2.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1",
+    "web3": "^1.2.6"
   },
   "scripts": {
     "start": "react-scripts start",
