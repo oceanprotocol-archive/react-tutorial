@@ -144,7 +144,7 @@ export default function Compute({ ocean, web3 }) {
         <button onClick={publish}>Publish dataset with compute service</button>
 
         <p>
-          <Label for="ddoAssetId">Asset DID</Label>
+          <Label htmlFor="ddoAssetId">Asset DID</Label>
           <input
             type="text"
             id="ddoAssetId"
@@ -153,19 +153,21 @@ export default function Compute({ ocean, web3 }) {
           />
         </p>
       </ComputeSection>
+
       <ComputeSection>
         <h3>2. Publish Algorithm</h3>
         <button onClick={publishalgo}>Publish algorithm</button>
         <p>
-          <Label for="ddoAlgorithmId">Algorithm DID</Label>
+          <Label htmlFor="ddoAlgorithmId">Algorithm DID</Label>
           <code id="ddoAlgorithmId">{ddoAlgorithmId}</code>
         </p>
       </ComputeSection>
+
       <ComputeSection>
         <h3>3. Start Compute Job</h3>
 
         <p>
-          <Label for="publishOutputState">
+          <Label htmlFor="publishOutputState">
             <input
               type="checkbox"
               id="publishOutputState"
@@ -174,7 +176,7 @@ export default function Compute({ ocean, web3 }) {
             />
             Publish Output into the Marketplace
           </Label>
-          <Label for="publishLogState">
+          <Label htmlFor="publishLogState">
             <input
               type="checkbox"
               id="publishLogState"
@@ -188,7 +190,7 @@ export default function Compute({ ocean, web3 }) {
         <div>
           <button onClick={showDivAlgo}>Show/Hide Raw Algorithm</button>
           <p style={{ display: isAlgoInputVisible ? 'block' : 'none' }}>
-            <Label for="jobStatus">Raw Algorithm</Label>
+            <Label htmlFor="jobStatus">Raw Algorithm</Label>
             <textarea
               style={{ width: '100%' }}
               rows="10"
@@ -199,7 +201,7 @@ export default function Compute({ ocean, web3 }) {
         </div>
 
         <p>
-          <Label for="jobId">Compute Job ID</Label>
+          <Label htmlFor="jobId">Compute Job ID</Label>
           <code>{jobId}</code>
         </p>
 
@@ -213,18 +215,16 @@ export default function Compute({ ocean, web3 }) {
           Order and start compute service with raw algorithm
         </button>
       </ComputeSection>
+
       <ComputeSection>
         <h3>4. Get Compute Job Status</h3>
 
-        <p>
-          <Label for="jobStatus">Compute Job Status</Label>
-          <pre
-            id="jobStatus"
-            style={{ padding: '1rem', background: 'ghostwhite' }}
-          >
-            <code>{jobStatus}</code>
-          </pre>
-        </p>
+        <pre
+          id="jobStatus"
+          style={{ padding: '1rem', background: 'ghostwhite' }}
+        >
+          <code>{jobStatus}</code>
+        </pre>
 
         <button onClick={getStatus} disabled={!jobId}>
           Get Job Status
