@@ -144,12 +144,7 @@ export default function Compute({ ocean, web3 }) {
 
         <p>
           <Label htmlFor="ddoAssetId">Asset DID</Label>
-          <input
-            type="text"
-            id="ddoAssetId"
-            value={ddoAssetId}
-            onChange={updateDdoAssetId}
-          />
+          <code id="ddoAssetId">{ddoAssetId}</code>
         </p>
       </ComputeSection>
 
