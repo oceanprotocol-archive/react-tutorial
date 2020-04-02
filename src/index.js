@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Ocean } from '@oceanprotocol/squid'
 import Web3 from 'web3'
 import asset from './asset'
+import Compute from './Compute'
 
 let web3
 
@@ -27,11 +28,11 @@ class App extends Component {
       brizoAddress: '0x4aaab179035dc57b35e2ce066919048686f82972',
       secretStoreUri: 'https://secret-store.nile.dev-ocean.com',
       // local Spree connection
-      // nodeUri: 'http://localhost:8545',
-      // aquariusUri: 'http://aquarius:5000',
-      // brizoUri: 'http://localhost:8030',
-      // brizoAddress: '0x00bd138abd70e2f00903268f3db08f2d25677c9e',
-      // secretStoreUri: 'http://localhost:12001',
+      //nodeUri: 'http://localhost:8545',
+      //aquariusUri: 'http://aquarius:5000',
+      //brizoUri: 'http://localhost:8030',
+      //brizoAddress: '0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0',
+      //secretStoreUri: 'http://localhost:12001',
       verbose: true
     })
     this.setState({ ocean })
@@ -75,19 +76,15 @@ class App extends Component {
       const accounts = await this.state.ocean.accounts.list()
       // get our registered asset
       const consumeAsset = this.state.ddo
-      // get service we want to execute
-      const service = consumeAsset.findServiceByType('access')
       // order service agreement
       const agreement = await this.state.ocean.assets.order(
         consumeAsset.id,
-        service.index,
         accounts[0]
       )
       // consume it
       await this.state.ocean.assets.consume(
         agreement,
         consumeAsset.id,
-        service.index,
         accounts[0],
         '',
         0
@@ -119,6 +116,8 @@ class App extends Component {
         <button onClick={() => this.consumeAsset()} disabled={!web3}>
           Consume asset
         </button>
+        <hr />
+        <Compute ocean={this.state.ocean} web3={web3} />
       </div>
     )
   }

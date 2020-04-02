@@ -45,18 +45,6 @@ const asset = {
         name: 'example code',
         type: 'example code',
         url: 'https://github.com/slothkong/CNN_classification_10_monkey_species'
-      },
-      {
-        url:
-          'https://s3.amazonaws.com/datacommons-seeding-us-east/10_Monkey_Species_Small/links/discovery/n5151.jpg',
-        name: 'n5151.jpg',
-        type: 'discovery'
-      },
-      {
-        url:
-          'https://s3.amazonaws.com/datacommons-seeding-us-east/10_Monkey_Species_Small/links/sample/sample.zip',
-        name: 'sample.zip',
-        type: 'sample'
       }
     ],
     inLanguage: 'en'
